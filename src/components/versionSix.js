@@ -1,17 +1,9 @@
-import React, { useRef, useState } from 'react'
-import { Button } from 'reactstrap'
+import React from 'react'
 
 const VersionSix = () => {
-    const ref = useRef(0)
-
-    const dataCounte = () => {
-        ref.current = ref.current + 1
-    }
-
     return (
         <div>
-            <Button onClick={() => { dataCounte }} >useRef increment</Button>
-            {ref.current}
+            version 6.0.0
         </div>
     )
 }
