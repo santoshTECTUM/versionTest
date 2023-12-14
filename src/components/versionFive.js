@@ -19,8 +19,8 @@ const VersionFive = () => {
         <div className='row'>
 
             {nButtonDetails?.map((item, key) => (
-                <div className='col-2'>
-                    <NButton key={key}
+                <div className='col-2' key={key}>
+                    <NButton
                         id={item?.id}
                         name={item?.name}
                         bgColor={item?.colorData}
