@@ -14,8 +14,10 @@ const VersionFive = () => {
     const [nButtonDetails, setNButtonDetails] = useState([{ id: 1, name: "About", colorData: "" }, { id: 2, name: "Contact", colorData: "" }])
     const currentURL = window.location.pathname;
     console.log(currentURL);
+
     const routePath = useNavigate()
     const colorData = null
+    const [activeRoute, setActiveRoute] = useState()
 
     useCallback(()=>{
         setActiveRoute(currentURL)
@@ -28,6 +30,12 @@ const VersionFive = () => {
                 item.id === id ? { ...item, colorData: "blue" } : { ...item, colorData: "" }
             )
         );
+    }
+
+    const vFiveRoute = (allRoute) => {
+        return allRoute?.map((ele, index) => (
+            ele?.key !== "notfound" && <Route path={ele?.path} element={ele?.component} key={index} />
+        ))
     }
 
     return (
@@ -52,13 +60,16 @@ const VersionFive = () => {
                         <Nav vertical fill pills tabs >
                             {routesJson?.map((ele) => (
                                 ele?.key !== "notfound" && <NavItem tabs>
+
                                     <NavLink onClick={(e) => { routePath(ele?.path) }}
                                         active={activeRoute == ele?.path}
+
                                     >
                                         {ele.name}
                                     </NavLink>
                                 </NavItem>
                             ))}
+
 
                             <NavItem tabs>
                                 <NavLink onClick={(e) => { routePath("/posts"); }}
@@ -73,11 +84,13 @@ const VersionFive = () => {
                 </div>
         
 
+
                 <div className='col-10'>
                     <Routes>
                         {routesJson?.length > 0 && vFiveRoute(routesJson)}
                         <Route path="/" element={<Home />} />
                         <Route path="*" element={<Notfound />} />
+
                         <Route element={<ProtectRoute />}>
                             <Route path='/posts' element={<Posts />}>
                                 <Route path='new' element={<NewPost />} />
@@ -90,6 +103,7 @@ const VersionFive = () => {
                 </div>
 
         </div>
+
         </>
     )
 }
